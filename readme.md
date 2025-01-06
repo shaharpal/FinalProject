@@ -100,6 +100,6 @@ The analysis suggests that the age of epilepsy onset has some influence on surgi
 
 ## Contact
 For any questions or suggestions, please contact:
-[Your Name]
-Email: [Your Email Address]
+shahar pal
+Email: shaharpal9@gmail.com
 
