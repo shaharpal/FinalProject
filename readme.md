@@ -5,6 +5,7 @@ This project investigates the relationship between the age of epilepsy onset and
 
 ## Dataset
 - **Source:** Provided dataset named `Metadata_Release_Anon.csv`.
+ url=(https://figshare.com/s/bab70268afeb1071202b?file=46131036)
 - **Participants:** 443 individuals who underwent epilepsy surgery.
 - **Key Features:**
   - Demographic information (e.g., age at onset, age at surgery).
@@ -31,18 +32,10 @@ Does the age of epilepsy onset influence the success rate of epilepsy surgery?
      - Average time to success by age group.
      - Trends in success rates comparing children (≤ 15 years) and adults (> 15 years).
 
-## Results
-### Key Findings
-1. **Success Rates by Year and Age Group:**
-   - Success rates varied across age groups and years.
-   - Trends indicated higher success rates in certain younger age groups.
 
-2. **Time to Success:**
-   - Average time to success differed among age groups, with younger participants often achieving success earlier.
-
-3. **Statistical Analysis:**
-   - **ANOVA:** Significant differences found among age groups in Year 2 (p-value = 0.0254), but not in other years.
-   - **Post-Hoc Test (Tukey HSD):** No significant pairwise differences identified in Year 2.
+ **Statistical Analysis:**
+   - **ANOVA:** 
+   - **Post-Hoc Test (Tukey HSD):** 
 
 ## Visualizations
 ### Included Graphs
@@ -65,22 +58,38 @@ Does the age of epilepsy onset influence the success rate of epilepsy surgery?
    - Table and graph summarizing pairwise comparisons of age groups for Year 2.
 
 ## File Structure
-- `analysis_code.py`: Python script for data processing, statistical analysis, and visualization.
-- `Metadata_Release_Anon.csv`: Dataset used for analysis.
-- `success_rates_by_year.csv`: Processed data showing success rates by year.
-- `avg_time_to_success.csv`: Average time to success by age group.
+The project is organized as follows:
+```
+Epilepsy_Analysis_Project/
+├── src/
+│   ├── DataAnalisys.py         # Main script for data analysis
+│   └── init.py                 
+├── data/
+│   ├── Metadata_Release_Anon.csv           # Original dataset
+│   ├── success_rates_by_year.csv           # Processed data showing success rates by year
+│   ├── avg_time_to_success.csv             # Average time to success by age group
+│   └── success_rates_children_vs_adults.csv # Processed data comparing children and adults
+├── results/
+│   ├── visualizations/          # Directory for saving generated graphs
+│   └── summary_of_the_findings.docx  # Document summarizing the research findings
+├── tests/
+│   └── test_analysis.py         # Unit tests for the analysis code
+├── pyproject.toml               # Project configuration file
+├── README.md                    # Project documentation (this file)
+└── requirements.txt             # Dependencies for the project
+```
 
 ## How to Run the Analysis
 1. Clone this repository.
 2. Install required Python libraries:
    ```bash
-   pip install pandas numpy matplotlib statsmodels scipy
+   pip install -r requirements.txt
    ```
 3. Run the analysis script:
    ```bash
-   python analysis_code.py
+   python src/DataAnalisys.py
    ```
-4. Output visualizations and processed data will be saved in the working directory.
+4. Output visualizations and processed data will be saved in the respective directories.
 
 ## Limitations
 1. **Small Sample Sizes**:
@@ -95,11 +104,13 @@ Does the age of epilepsy onset influence the success rate of epilepsy surgery?
    - The analysis is restricted to five years post-surgery. Longer-term outcomes may show different trends.
 
 
-## Conclusion
-The analysis suggests that the age of epilepsy onset has some influence on surgical success, with differences observed primarily in the second year post-surgery. However, further investigation with additional factors (e.g., type of surgery, pathology) is recommended to confirm and refine these findings.
-
 ## Contact
 For any questions or suggestions, please contact:
-shahar pal
+Shahar Pal
 Email: shaharpal9@gmail.com
 
+
+
+
+
+   
