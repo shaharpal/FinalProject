@@ -12,7 +12,7 @@ matplotlib.use('Agg')
 
 # Constants
 SUCCESS_THRESHOLD = 2  # Used for ILAE success definition
-P_VALUE_THRESHOLD = 0.1  # For significance testing
+P_VALUE_THRESHOLD = 0.10  # For significance testing
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
@@ -232,7 +232,7 @@ def main():
 
         # Load dataset
         file_path = data_dir / "Metadata_Release_Anon.csv"
-        data = load_dataset(file_path)
+        data = pd.read_csv(file_path)
 
         # Preprocess data
         for year in range(1, 6):
@@ -243,6 +243,12 @@ def main():
 
         data["Time_to_Success"] = data.apply(time_to_success, axis=1)
 
+        # Perform visualizations
+        success_cols = [f"Success_Year{year}" for year in range(1, 6)]
+        plot_success_rates(data, "Binned_Onset_Age", success_cols, results_dir)
+        plot_age_group_comparison(data, success_cols, results_dir)
+        plot_avg_time_to_success(data, "Binned_Onset_Age", "Time_to_Success", results_dir)
+
         # Perform ANOVA for children vs adults for all years
         age_groups = {
             "Children": ["< 1", "1 to 2", "3-4", "5 to 7", "8-10", "11 to 14"],
@@ -251,7 +257,7 @@ def main():
         children_data = data[data['Binned_Onset_Age'].isin(age_groups["Children"])]
         adults_data = data[data['Binned_Onset_Age'].isin(age_groups["Adults"])]
 
-        for year_col in [f"Success_Year{year}" for year in range(1, 6)]:
+        for year_col in success_cols:
             children_success = children_data[year_col].dropna()
             adults_success = adults_data[year_col].dropna()
 
@@ -263,7 +269,6 @@ def main():
                     plot_tukey_test(data, year_col, "Binned_Onset_Age", results_dir)
 
         # Perform ANOVA and Tukey's HSD tests for all age groups
-        success_cols = [f"Success_Year{year}" for year in range(1, 6)]
         for year_col in success_cols:
             p_value = perform_anova(data, "Binned_Onset_Age", year_col)
             if p_value is not None:
@@ -277,5 +282,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-
